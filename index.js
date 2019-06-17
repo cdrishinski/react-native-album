@@ -2,14 +2,15 @@
  * @format
  */
 
-import { AppRegistry } from 'react-native';
-import App from './App';
-import { name as appName } from './app.json';
-import console = require('console');
+ //index.ios.js  - place code in her for ios!!!
+//import library to help create component
+import React from 'react';
+import ReactNative from 'react-native';
+
+//create component
+const App = () => (
+            <Text>Some Text</Text>
+            );
 
 
-var x = 4;
-
-console.log(x);
-
-AppRegistry.registerComponent(appName, () => App);
+//render component to device
