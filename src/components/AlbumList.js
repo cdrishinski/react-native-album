@@ -1,10 +1,37 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { Text, View } from 'react-native';
+import Axios from 'axios';
+import AlbumDetail from './AlbumDetail';
 
-const AlbumList = () => (
-    <View>
-        <Text>SOME AlBUMMS</Text>
-    </View>
-    );
+
+//class component, requires render ()
+class AlbumList extends Component {
+    // initial (empty) state
+state = { albums: [] }; 
+    //componentWillMount lets us fetch data and import it, from API
+componentWillMount() {
+    Axios.get('https://rallycoding.herokuapp.com/api/music_albums')
+        .then(response => this.setState({ albums: response.data }));//this updates 
+        //component state, so its not empty anymore
+}
+
+//helper function to map through data
+    renderAlbums() {
+        return this.state.albums.map(album => 
+        <AlbumDetail key={album.title} album={album} />
+        );
+    }
+
+    render() {
+console.log(this.state);
+
+        return ( 
+            <View>
+                 {this.renderAlbums()}
+            </View>
+         );
+        }
+    }
+   
 
 export default AlbumList;
